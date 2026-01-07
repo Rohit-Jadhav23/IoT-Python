@@ -1,0 +1,53 @@
+### Python Installation
+	 
+	sudo apt-get install python3 python3-pip
+
+Step 1 — Installing MySQL
+	
+	sudo apt update
+	sudo apt install mysql-server
+	sudo systemctl start mysql.service
+
+Step 2 — Configuring MySQL
+	
+	sudo mysql
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+	exit
+	mysql -u root -p
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+	sudo mysql_secure_installation
+
+Step 3 — Creating a Dedicated MySQL User and Granting Privileges
+
+	sudo mysql
+	mysql -u root -p
+	CREATE USER 'username'@'host' IDENTIFIED WITH authentication_plugin BY 'password';
+	CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+
+Step 4 — Testing MySQL
+	
+	systemctl status mysql.service
+	sudo systemctl start mysql
+	sudo mysqladmin -p -u username version
+
+### Arduino IDE Installation
+
+	https://www.arduino.cc/en/software
+
+#### Install MQTT Broker
+	sudo apt-get install mosquitto
+
+## Install MQTT Clients
+	sudo apt-get install mosquitto-clients
+
+## Start mosquitto service if not started
+	sudo systemctl start mosquitto
+	
+## Publish messages using following commands
+
+	mosquitto_pub  -h "localhost" -p 1883 -t "topic/hello" -m "Hello MQTT"
+	mosquitto_pub  -h "localhost" -p 1883 -t "topic/hello" -m "Hello DESD" -d
+
+## Subscribe messages using following commands
+	
+	mosquitto_sub -h "localhost" -p 1883 -t "topic/hello"
